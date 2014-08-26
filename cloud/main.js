@@ -11,5 +11,5 @@ AV.Cloud.define("settle_timer", function(request, response) {
 		},
 		error: function(error) {}
 	});
-	return res.success();
+	response.success("settle run succeed");
 });
