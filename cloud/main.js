@@ -7,7 +7,7 @@ AV.Cloud.define("hello", function(request, response) {
 AV.Cloud.define("record_desc", function(request, response) {
 	var RecordDesc = AV.Object.extend("RecordDesc");
 	var descQuery = new AV.Query(RecordDesc);
-	descQuery.equalTo("hasSettle", "false");
+	descQuery.equalTo("hasSettle", false);
 	descQuery.find({
 		success: function(results) {
 			console.log("record_desc ========= " + results.length);
