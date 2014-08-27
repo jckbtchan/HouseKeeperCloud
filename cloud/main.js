@@ -25,6 +25,7 @@ AV.Cloud.define("record_result", function(request, response) {
 	var money = RecordDesc.get('money');
 	var member = RecordDesc.get('member');
 	var objectId = RecordDesc.get('objectId');
+	console.log(objectId);
 
 	var RecordResult = AV.Object.extend("RecordResult");
 	var resultQuery = new AV.Query(RecordResult);
@@ -63,7 +64,7 @@ AV.Cloud.define("settle_timer", function(request, response) {
 				var object = results[i];
 				AV.Cloud.run("record_result", { RecordDesc_1:object }, {
 					success: function(results) {
-						console.log("settle_timer sub_results" + results[0]);
+						console.log("settle_timer sub_results");
 						var objectId =results[0];
 						var RecordDesc = new RecordDesc();
 						RecordDesc.id = objectId;
