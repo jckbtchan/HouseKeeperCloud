@@ -61,11 +61,9 @@ AV.Cloud.define("settle_timer", function(request, response) {
 			console.log("settle_timer record_desc results");
 			var length = results.length;
 			for (var i = 0; i < length; i++) {
-				AV.Cloud.run("record_result", {
-					results[0]
-				}, {
+				AV.Cloud.run("record_result", {}, {
 					success: function(results) {
-						console.log("settle_timer record_result results");
+						console.log("settle_timer record_result results" + results);
 						var objectId = results[0];
 						var RecordDesc = new RecordDesc();
 						RecordDesc.id = objectId;
