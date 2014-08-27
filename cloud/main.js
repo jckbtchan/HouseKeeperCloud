@@ -62,32 +62,32 @@ AV.Cloud.define("settle_timer", function(request, response) {
 			var length = results.length;
 			for (var i = 0; i < length; i++) {
 				AV.Cloud.run("record_result", {}, {
-					success: function(results) {
-						console.log("settle_timer record_result results" + results);
-						var objectId = results[0];
+					success: function(sub_results) {
+						console.log("settle_timer record_result sub_results" + sub_results);
+						var objectId = sub_results[0];
 						var RecordDesc = new RecordDesc();
 						RecordDesc.id = objectId;
 						query.equalTo("RecordDesc", RecordDesc);
 						query.first({
-							success: function(results) {
-								var object = results[0];
+							success: function(results1) {
+								var object = results1[0];
 								object.set("hasSettle", "true");
 								object.save();
 								console.log("has Settle done");
 							},
-							error: function(error) {
+							error: function(error3) {
 								console.log("has Settle query fale" + error);
 							}
 						});
 						console.log("settle_timer success " + objectId);
 					},
-					error: function(error) {
+					error: function(error2) {
 						console.log("settle_timer error " + error);
 					}
 				});
 			}
 		},
-		error: function(error) {
+		error: function(error1) {
 			console.log(error);
 		}
 	});
