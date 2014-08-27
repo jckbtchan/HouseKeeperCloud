@@ -24,6 +24,7 @@ AV.Cloud.define("record_desc", function(request, response) {
 AV.Cloud.define("record_result", function(request, response) {
 	console.log("record_result in ");
 	//request.Object.get("RecordDesc")
+	//var RecordDesc = request.param.RecordDesc;
 	var RecordDesc = request.object.get("RecordDesc");
 	console.log("RecordDesc :  " + RecordDesc);
 	var payer = RecordDesc.get('payer');
@@ -67,7 +68,7 @@ AV.Cloud.define("settle_timer", function(request, response) {
 			console.log("settle_timer record_desc results ------------  " + results.length);
 			var length = results.length;
 			for (var i = 0; i < length; i++) {
-				AV.Cloud.run("record_result", results[i], {
+				AV.Cloud.run("record_result", {"RecordDesc":results[i]}, {
 					success: function(sub_results) {
 						console.log("settle_timer record_result sub_results" + sub_results);
 						var objectId = sub_results[0];
