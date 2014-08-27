@@ -58,7 +58,7 @@ AV.Cloud.define("push", function(request, response) {
 AV.Cloud.define("settle_timer", function(request, response) {
 	AV.Cloud.run('record_desc', {}, {
 		success: function(results) {
-			console.log("settle_timer record_desc results" + results[0].get("payer"));
+			console.log("settle_timer record_desc results");
 			var length = results.length;
 			for (var i = 0; i < length; i++) {
 				AV.Cloud.run("record_result", {
