@@ -10,7 +10,6 @@ AV.Cloud.define("record_desc", function(request, response) {
 	descQuery.equalTo("hasSettle", "false");
 	descQuery.find({
 		success: function(results) {
-			console.log("record_desc return");
 			response.success(results);
 		},
 		error: function(error) {
@@ -56,13 +55,12 @@ AV.Cloud.define("push", function(request, response) {
 	response.success("Push!");
 });
 
-var RecordDesc = AV.Object.extend("RecordDesc");
-
 AV.Cloud.define("settle_timer", function(request, response) {
 	AV.Cloud.run('record_desc', {}, {
 		success: function(results) {
 			console.log("settle_timer record_desc results");
 			var length = results.length;
+			var RecordDesc = AV.Object.extend("RecordDesc");
 			for (var i = 0; i < length; i++) {
 				AV.Cloud.run("record_result", {
 					RecordDesc: results[i]
