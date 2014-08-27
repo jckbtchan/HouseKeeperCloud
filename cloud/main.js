@@ -24,6 +24,7 @@ AV.Cloud.define("record_desc", function(request, response) {
 				RecordDescs[i][2] = member;
 				RecordDescs[i][3] = objectId;
 			}
+			console.log("record_desc return");
 			return RecordDescs;
 		},
 		error: function(error) {
@@ -72,12 +73,14 @@ AV.Cloud.define("push", function(request, response) {
 AV.Cloud.define("settle_timer", function(request, response) {
 	AV.Cloud.run('record_desc', {}, {
 		success: function(results) {
+			console.log("settle_timer record_desc results");
 			var length = results.length;
 			for (var i = 0; i < length; i++) {
 				AV.Cloud.run("record_result", {
 					RecordDescs: results[i]
 				}, {
 					success: function(results) {
+						console.log("settle_timer record_result results");
 						var objectId = results[0];
 						var RecordDesc = new RecordDesc();
 						RecordDesc.id = objectId;
