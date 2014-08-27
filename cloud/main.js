@@ -10,6 +10,7 @@ AV.Cloud.define("record_desc", function(request, response) {
 	descQuery.equalTo("hasSettle", "false");
 	descQuery.find({
 		success: function(results) {
+			console.log("record_desc ========= " + results[0])
 			response.success(results);
 		},
 		error: function(error) {
