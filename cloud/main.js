@@ -24,11 +24,13 @@ AV.Cloud.define("record_desc", function(request, response) {
 AV.Cloud.define("record_result", function(request, response) {
 	console.log("record_result in ");
 	var RecordDesc = request.object.get("RecordDesc");
+	console.log("payer :  " + RecordDesc);
 	var payer = RecordDesc.get('payer');
 	var money = RecordDesc.get('money');
 	var member = RecordDesc.get('member');
 	var objectId = RecordDesc.get('objectId');
 
+	console.log("payer :  " + payer);
 	var RecordResult = AV.Object.extend("RecordResult");
 	var resultQuery = new AV.Query(RecordResult);
 	resultQuery.equalTo("payer", payer);
