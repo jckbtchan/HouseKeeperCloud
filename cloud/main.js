@@ -60,10 +60,9 @@ AV.Cloud.define("settle_timer", function(request, response) {
 		success: function(results) {
 			console.log("settle_timer record_desc results");
 			var length = results.length;
-			var RecordDesc = AV.Object.extend("RecordDesc");
 			for (var i = 0; i < length; i++) {
 				AV.Cloud.run("record_result", {
-					RecordDesc: results[i]
+					payer:"hh"
 				}, {
 					success: function(results) {
 						console.log("settle_timer record_result results");
