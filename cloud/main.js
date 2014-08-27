@@ -42,8 +42,7 @@ AV.Cloud.define("record_result", function(request, response) {
 				}
 			};
 			object.save();
-			console.log("record_result settle"+request.params.RecordDesc_1.get('objectId'));
-			response.success(request.params.RecordDesc_1.get('objectId'));
+			response.success();
 		},
 		error: function(error) {
 			console.log("record_result error " + error);
@@ -60,10 +59,11 @@ AV.Cloud.define("settle_timer", function(request, response) {
 		success: function(results) {
 			var length = results.length;
 			for (var i = 0; i < length; i++) {
-				AV.Cloud.run("record_result", { RecordDesc_1:results[i]}, {
+				var object = results[i];
+				AV.Cloud.run("record_result", { RecordDesc_1:object }, {
 					success: function(results) {
-						console.log("settle_timer record_result sub_results" + results);
-						var objectId = results[0];
+						console.log("settle_timer record_result sub_results" + object.get('objectId'));
+						var objectId = object.get('objectId');
 						var RecordDesc = new RecordDesc();
 						RecordDesc.id = objectId;
 						query.equalTo("RecordDesc", RecordDesc);
