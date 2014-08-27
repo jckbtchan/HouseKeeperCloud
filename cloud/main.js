@@ -22,10 +22,10 @@ AV.Cloud.define("record_desc", function(request, response) {
 				RecordDescs[i][1] = money;
 				RecordDescs[i][2] = member;
 			}
-			response.success(RecordDescs);
+			return RecordDescs;
 		},
 		error: function(error) {
-			response.error("Error: " + error.code + " " + error.message);
+			console.log("record_desc error " + error);
 		}
 	});
 });
@@ -54,7 +54,7 @@ AV.Cloud.define("record_result", function(request, response) {
 			response.success();
 		},
 		error: function(error) {
-			response.error("Error: " + error.code + " " + error.message);
+			console.log("record_result error " + error);
 		}
 	});
 });
@@ -74,8 +74,8 @@ AV.Cloud.define("settle_timer", function(request, response) {
 					success: function(result) {
 						console.log("settle_timer success " + result);
 					},
-					error: function(err) {
-						console.log("settle_timer error " + err);
+					error: function(error) {
+						console.log("settle_timer error " + error);
 					}
 				});
 			}
