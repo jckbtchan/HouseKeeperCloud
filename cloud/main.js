@@ -24,7 +24,7 @@ AV.Cloud.define("record_result", function(request, response) {
 	var payer = RecordDesc.get('payer');
 	var money = RecordDesc.get('money');
 	var member = RecordDesc.get('member');
-	final var objectId = RecordDesc.get('objectId');
+	var objectId = RecordDesc.get('objectId');
 
 	var RecordResult = AV.Object.extend("RecordResult");
 	var resultQuery = new AV.Query(RecordResult);
@@ -42,6 +42,7 @@ AV.Cloud.define("record_result", function(request, response) {
 				}
 			};
 			object.save();
+			console.log("record_result objectId"＋objectId);
 			response.success(objectId);
 		},
 		error: function(error) {
