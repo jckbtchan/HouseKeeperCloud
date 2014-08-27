@@ -56,6 +56,8 @@ AV.Cloud.define("push", function(request, response) {
 	response.success("Push!");
 });
 
+var RecordDesc = AV.Object.extend("RecordDesc");
+
 AV.Cloud.define("settle_timer", function(request, response) {
 	AV.Cloud.run('record_desc', {}, {
 		success: function(results) {
@@ -63,7 +65,7 @@ AV.Cloud.define("settle_timer", function(request, response) {
 			var length = results.length;
 			for (var i = 0; i < length; i++) {
 				AV.Cloud.run("record_result", {
-					"RecordDesc": results[i]
+					RecordDesc: results[i]
 				}, {
 					success: function(results) {
 						console.log("settle_timer record_result results");
