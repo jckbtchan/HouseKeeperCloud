@@ -72,16 +72,16 @@ AV.Cloud.define("settle_timer", function(request, response) {
 					RecordDescs: results[i]
 				}, {
 					success: function(result) {
-						
+						console.log("settle_timer success " + result);
 					},
 					error: function(err) {
-						alert("Error: " + error.code + " " + error.message);
+						console.log("settle_timer error " + err);
 					}
 				});
 			}
 		},
 		error: function(error) {
-			alert("Error: " + error.code + " " + error.message);
+			console.log(error);
 		}
 	});
 });
