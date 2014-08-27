@@ -24,8 +24,8 @@ AV.Cloud.define("record_desc", function(request, response) {
 AV.Cloud.define("record_result", function(request, response) {
 	console.log("record_result in ");
 	//request.Object.get("RecordDesc")
-	//var RecordDesc = request.param.RecordDesc;
-	var RecordDesc = request.object.get("RecordDesc");
+	var RecordDesc = request.param.RecordDesc;
+	//var RecordDesc = request.object.get("RecordDesc");
 	console.log("RecordDesc :  " + RecordDesc);
 	var payer = RecordDesc.get('payer');
 	var money = RecordDesc.get('money');
