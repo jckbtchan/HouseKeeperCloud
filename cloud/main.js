@@ -24,7 +24,7 @@ AV.Cloud.define("record_desc", function(request, response) {
 				RecordDescs[i][2] = member;
 				RecordDescs[i][3] = objectId;
 			}
-			response.success(RecordDescs);
+			return RecordDescs;
 		},
 		error: function(error) {
 			console.log("record_desc error " + error);
