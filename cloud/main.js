@@ -10,22 +10,8 @@ AV.Cloud.define("record_desc", function(request, response) {
 	descQuery.equalTo("hasSettle", "false");
 	descQuery.find({
 		success: function(results) {
-			var length = results.length;
-			var RecordDescs = new Array(length);
-			for (var i = 0; i < length; i++) {
-				var object = results[i];
-				var payer = object.get('payer');
-				var money = object.get('money');
-				var member = object.get('member');
-				var objectId = object.get('objectId');
-				RecordDescs[i] = new Array(3);
-				RecordDescs[i][0] = payer;
-				RecordDescs[i][1] = money;
-				RecordDescs[i][2] = member;
-				RecordDescs[i][3] = objectId;
-			}
 			console.log("record_desc return");
-			return RecordDescs;
+			response.success(results);
 		},
 		error: function(error) {
 			console.log("record_desc error " + error);
@@ -35,11 +21,11 @@ AV.Cloud.define("record_desc", function(request, response) {
 
 AV.Cloud.define("record_result", function(request, response) {
 	console.log("record_result in ");
-	var RecordDescs = request.object.get("RecordDescs");
-	var payer = RecordDescs[0];
-	var money = RecordDescs[1];
-	var member = RecordDescs[2];
-	var objectId = RecordDescs[3];
+	var RecordDesc = request.object.get("RecordDesc");
+	var payer = RecordDesc.get('payer');
+	var money = RecordDesc.get('money');
+	var member = RecordDesc.get('member');
+	var objectId = RecordDesc.get('objectId');
 
 	var RecordResult = AV.Object.extend("RecordResult");
 	var resultQuery = new AV.Query(RecordResult);
@@ -77,7 +63,7 @@ AV.Cloud.define("settle_timer", function(request, response) {
 			var length = results.length;
 			for (var i = 0; i < length; i++) {
 				AV.Cloud.run("record_result", {
-					RecordDescs: results[i]
+					RecordDesc: results[i]
 				}, {
 					success: function(results) {
 						console.log("settle_timer record_result results");
