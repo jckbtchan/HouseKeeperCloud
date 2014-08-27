@@ -5,11 +5,14 @@ AV.Cloud.define("hello", function(request, response) {
 });
 
 AV.Cloud.define("record_desc", function(request, response) {
+	console.log("record_desc in");
 	var RecordDesc = AV.Object.extend("RecordDesc");
 	var descQuery = new AV.Query(RecordDesc);
 	descQuery.equalTo("hasSettle", "false");
+	console.log("record_desc start descQuery");
 	descQuery.find({
 		success: function(results) {
+			console.log("record_desc descQuery success");
 			var length = results.length;
 			var RecordDescs = new Array(length);
 			for (var i = 0; i < length; i++) {
@@ -22,6 +25,7 @@ AV.Cloud.define("record_desc", function(request, response) {
 				RecordDescs[i][1] = money;
 				RecordDescs[i][2] = member;
 			}
+			console.log("record_desc descQuery return");
 			return RecordDescs;
 		},
 		error: function(error) {
